@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Vision Board · 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Trocchi&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           RESET & VARIABLES
+           ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #e4e9f0;
+            --bg-dark: #c8d0dc;
+            --card-bg: #e4e9f0;
+            --shadow-outer: 8px 8px 16px #b8c0cc, -8px -8px 16px #ffffff;
+            --shadow-inner: inset 3px 3px 6px #b8c0cc, inset -3px -3px 6px #ffffff;
+            --shadow-hover: 12px 12px 24px #b0b8c4, -12px -12px 24px #ffffff;
+            --text: #2c3e4f;
+            --text-light: #5a6f7e;
+            --text-muted: #8a9ca8;
+            --accent: #6c8b9f;
+            --accent-light: #d2dfe8;
+            --radius: 24px;
+            --radius-sm: 14px;
+            --transition: 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+            --font: 'Trocchi', serif;
+            --cat-personal: #d4b8a0;
+            --cat-career: #8aa9b5;
+            --cat-health: #c9b0a8;
+            --cat-finance: #b8b0a0;
+            --cat-learning: #a8b8c0;
+            --cat-relationships: #c8b0b8;
+            --cat-other: #b0b0b0;
+        }
+
+        html {
+            font-size: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px 16px 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 400;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* ============================================================
+           APP CONTAINER
+           ============================================================ */
+        .app {
+            max-width: 560px;
+            width: 100%;
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            backdrop-filter: blur(2px);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-left: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* ============================================================
+           BUTTONS (neumorphic)
+           ============================================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font);
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: var(--card-bg);
+            color: var(--text);
+            box-shadow: var(--shadow-outer);
+            cursor: pointer;
+            transition: var(--transition);
+            touch-action: manipulation;
+            user-select: none;
+            min-height: 44px;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:active {
+            box-shadow: var(--shadow-inner);
+            transform: scale(0.96);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 6px 6px 12px #b0b8c4, -6px -6px 12px #ffffff;
+        }
+
+        .btn-primary:active {
+            box-shadow: inset 4px 4px 8px #4d6a7a, inset -4px -4px 8px #8aaec2;
+        }
+
+        .btn-accent {
+            background: var(--text);
+            color: #fff;
+            box-shadow: 6px 6px 12px #b0b8c4, -6px -6px 12px #ffffff;
+        }
+
+        .btn-accent:active {
+            box-shadow: inset 4px 4px 8px #1a2a36, inset -4px -4px 8px #3e5260;
+        }
+
+        .btn-icon {
+            padding: 10px 14px;
+            font-size: 1.2rem;
+            min-width: 44px;
+        }
+
+        /* ============================================================
+           BOARD GRID
+           ============================================================ */
+        .board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 440px) {
+            .board {
+                gap: 12px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .board {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 22px;
+            }
+            .app {
+                max-width: 780px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .board {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 26px;
+            }
+            .app {
+                max-width: 960px;
+            }
+        }
+
+        /* ============================================================
+           CARD (neumorphic)
+           ============================================================ */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-outer);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.35s ease, opacity 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: none;
+            cursor: default;
+            touch-action: none;
+            min-height: 140px;
+            will-change: transform;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .card.dragging {
+            opacity: 0.5;
+            transform: scale(0.96);
+            z-index: 100;
+            box-shadow: var(--shadow-inner);
+        }
+
+        .card.drag-over {
+            box-shadow: 0 0 0 3px var(--accent), var(--shadow-outer);
+            transform: scale(1.01);
+        }
+
+        /* ---------- drag handle ---------- */
+        .card-drag-handle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: grab;
+            touch-action: none;
+            z-index: 5;
+            transition: var(--transition);
+            border: none;
+            padding: 0;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .card-drag-handle:active {
+            cursor: grabbing;
+            box-shadow: var(--shadow-inner);
+        }
+
+        .card-drag-handle:hover {
+            color: var(--text);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ---------- image ---------- */
+        .card-image-wrap {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: var(--bg-dark);
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .card-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-image-wrap img {
+            transform: scale(1.02);
+        }
+
+        .card-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: var(--text-muted);
+            background: var(--bg);
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        /* ---------- body ---------- */
+        .card-body {
+            padding: 14px 16px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text);
+            word-break: break-word;
+            margin-bottom: 2px;
+        }
+
+        .card-title-input {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: var(--font);
+            border: none;
+            background: transparent;
+            color: var(--text);
+            width: 100%;
+            padding: 0;
+            outline: none;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            line-height: 1.3;
+        }
+
+        .card-title-input:focus {
+            border-bottom-color: var(--accent);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .card-desc-input {
+            font-size: 0.9rem;
+            font-family: var(--font);
+            color: var(--text-light);
+            border: none;
+            background: transparent;
+            width: 100%;
+            padding: 0;
+            outline: none;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            line-height: 1.4;
+            resize: vertical;
+            min-height: 32px;
+        }
+
+        .card-desc-input:focus {
+            border-bottom-color: var(--accent);
+        }
+
+        /* ---------- category badge ---------- */
+        .card-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 14px 4px 12px;
+            border-radius: 50px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-inner);
+            color: var(--text-light);
+            align-self: flex-start;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .card-category .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+            background: var(--accent);
+        }
+
+        /* ---------- progress (steps) ---------- */
+        .card-progress-wrap {
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-progress-track {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-dark);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: inset 2px 2px 4px #b8c0cc, inset -2px -2px 4px #ffffff;
+        }
+
+        .card-progress-fill {
+            height: 100%;
+            border-radius: 50px;
+            background: var(--accent);
+            transition: width 0.5s ease;
+            width: 0%;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-progress-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-light);
+            min-width: 36px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ---------- steps list ---------- */
+        .steps-list {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-height: 120px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .steps-list::-webkit-scrollbar {
+            width: 3px;
+        }
+        .steps-list::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+            border-radius: 10px;
+        }
+        .steps-list::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            padding: 4px 8px 4px 4px;
+            border-radius: 30px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-inner);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .step-item.done {
+            opacity: 0.6;
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .step-item .step-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+            border: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .step-item .step-check:active {
+            box-shadow: var(--shadow-inner);
+        }
+
+        .step-item .step-check.done-check {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: inset 2px 2px 4px #4d6a7a, inset -2px -2px 4px #8aaec2;
+        }
+
+        .step-item .step-text {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .step-item .step-delete {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 4px;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .step-item .step-delete:active {
+            transform: scale(0.8);
+        }
+
+        .step-item .step-delete:hover {
+            color: #c45a5a;
+        }
+
+        /* ---------- card actions ---------- */
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-action-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            color: var(--text-light);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            padding: 0;
+            font-weight: 700;
+        }
+
+        .card-action-btn:active {
+            box-shadow: var(--shadow-inner);
+            transform: scale(0.92);
+        }
+
+        .card-action-btn:hover {
+            color: var(--text);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-action-btn.danger:hover {
+            color: #c45a5a;
+            box-shadow: var(--shadow-inner);
+        }
+
+        /* ============================================================
+           EMPTY STATE
+           ============================================================ */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px 50px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-outer);
+            color: var(--text-muted);
+        }
+
+        .empty-state .icon {
+            font-size: 3.6rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 280px;
+            margin: 0 auto 20px;
+        }
+
+        /* ============================================================
+           MODAL (neumorphic)
+           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
+            z-index: 500;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            max-width: 480px;
+            width: 100%;
+            padding: 28px 24px 24px;
+            box-shadow: var(--shadow-outer);
+            transform: translateY(20px) scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1), opacity 0.3s ease;
+            opacity: 0;
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .modal-close:active {
+            box-shadow: var(--shadow-inner);
+            transform: scale(0.90);
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            font-family: var(--font);
+            font-size: 1rem;
+            padding: 12px 16px;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-inner);
+            color: var(--text);
+            transition: var(--transition);
+            outline: none;
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            box-shadow: inset 3px 3px 8px #b0b8c4, inset -3px -3px 8px #ffffff, 0 0 0 2px var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6f7e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 44px;
+        }
+
+        /* steps in modal */
+        .steps-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .steps-editor .step-input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .steps-editor .step-input-row input {
+            flex: 1;
+        }
+
+        .steps-editor .step-list-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-height: 140px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .steps-editor .step-list-editor .step-editor-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 30px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-inner);
+            font-size: 0.9rem;
+        }
+
+        .steps-editor .step-list-editor .step-editor-item .step-text {
+            flex: 1;
+        }
+
+        .steps-editor .step-list-editor .step-editor-item .step-remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0 6px;
+            transition: var(--transition);
+        }
+
+        .steps-editor .step-list-editor .step-editor-item .step-remove:active {
+            transform: scale(0.8);
+        }
+
+        .steps-editor .step-list-editor .step-editor-item .step-remove:hover {
+            color: #c45a5a;
+        }
+
+        /* file input */
+        .form-group .file-input-wrap {
+            position: relative;
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-inner);
+        }
+
+        .form-group .file-input-wrap:active {
+            box-shadow: var(--shadow-outer);
+            transform: scale(0.98);
+        }
+
+        .form-group .file-input-wrap input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .form-group .file-input-wrap .file-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            pointer-events: none;
+            font-weight: 700;
+        }
+
+        .form-group .file-input-wrap .file-label .icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 300;
+        }
+
+        .form-group .image-preview {
+            margin-top: 12px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            max-height: 160px;
+            display: none;
+            position: relative;
+            box-shadow: var(--shadow-inner);
+        }
+
+        .form-group .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: 160px;
+        }
+
+        .form-group .image-preview .remove-img {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            color: var(--text-light);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .form-group .image-preview .remove-img:active {
+            box-shadow: var(--shadow-inner);
+            transform: scale(0.90);
+        }
+
+        /* modal footer */
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer .btn {
+            flex: 1;
+            min-height: 48px;
+            font-size: 1rem;
+        }
+
+        .modal-footer .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text);
+            box-shadow: var(--shadow-outer);
+        }
+
+        .modal-footer .btn-secondary:active {
+            box-shadow: var(--shadow-inner);
+        }
+
+        /* ============================================================
+           TOAST
+           ============================================================ */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            color: var(--text);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            z-index: 600;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: 0.3px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ============================================================
+           FOCUS MODE
+           ============================================================ */
+        .card.focused {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.04);
+            z-index: 400;
+            max-width: 400px;
+            width: 92%;
+            box-shadow: var(--shadow-hover);
+            border: none;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), box-shadow 0.4s ease;
+        }
+
+        .card.focused .card-drag-handle {
+            display: none;
+        }
+
+        .board.focus-mode .card:not(.focused) {
+            opacity: 0.2;
+            filter: blur(3px);
+            pointer-events: none;
+            transform: scale(0.92);
+            transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+        }
+
+        .board.focus-mode .card.focused {
+            pointer-events: auto;
+        }
+
+        .focus-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            z-index: 399;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .focus-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .focus-exit {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 401;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-outer);
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            touch-action: manipulation;
+            color: var(--text);
+        }
+
+        .focus-exit:active {
+            box-shadow: var(--shadow-inner);
+            transform: scale(0.90);
+        }
+
+        .focus-exit.visible {
+            display: flex;
+        }
+
+        /* ============================================================
+           CELEBRATION (confetti)
+           ============================================================ */
+        .celebration-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(0.3);
+            }
+        }
+
+        /* ============================================================
+           SCROLLBAR
+           ============================================================ */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            box-shadow: inset 1px 1px 2px #b8c0cc, inset -1px -1px 2px #ffffff;
+        }
+
+        /* ============================================================
+           RESPONSIVE FINE-TUNE
+           ============================================================ */
+        @media (max-width: 400px) {
+            .board {
+                gap: 10px;
+            }
+            .card-body {
+                padding: 12px 12px 14px;
+            }
+            .card-title {
+                font-size: 1rem;
+            }
+            .card-desc {
+                font-size: 0.85rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            .btn {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+                min-height: 38px;
+            }
+            .modal {
+                padding: 20px 16px 18px;
+            }
+        }
+
+        /* hide scrollbars on touch devices */
+        @media (hover: none) {
+            .steps-list::-webkit-scrollbar,
+            .steps-editor .step-list-editor::-webkit-scrollbar {
+                width: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== APP ===== -->
+    <div class="app" id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Vision <small>2026</small></h1>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-icon" id="addImageBtn" aria-label="Add image" title="Add Image">+</button>
+                <button class="btn btn-primary" id="addGoalBtn" aria-label="Add goal" title="Add Goal">+ Goal</button>
+            </div>
+        </header>
+
+        <!-- Board -->
+        <div class="board" id="board"></div>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Goal</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CELEBRATION ===== -->
+    <div class="celebration-overlay" id="celebrationOverlay"></div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== FOCUS BACKDROP ===== -->
+    <div class="focus-backdrop" id="focusBackdrop"></div>
+    <button class="focus-exit" id="focusExit">✕</button>
+
+    <script>
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let cards = [];
+        let nextId = 1;
+        let dragData = null;
+        let focusedCardId = null;
+        let toastTimeout = null;
+
+        const CATEGORIES = [
+            { value: 'personal', label: 'Personal', color: 'var(--cat-personal)' },
+            { value: 'career', label: 'Career', color: 'var(--cat-career)' },
+            { value: 'health', label: 'Health', color: 'var(--cat-health)' },
+            { value: 'finance', label: 'Finance', color: 'var(--cat-finance)' },
+            { value: 'learning', label: 'Learning', color: 'var(--cat-learning)' },
+            { value: 'relationships', label: 'Relationships', color: 'var(--cat-relationships)' },
+            { value: 'other', label: 'Other', color: 'var(--cat-other)' },
+        ];
+
+        const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.value, c]));
+
+        // ============================================================
+        //  STORAGE
+        // ============================================================
+        function loadState() {
+            try {
+                const raw = localStorage.getItem('visionBoardData');
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    cards = data.cards || [];
+                    nextId = data.nextId || 1;
+                }
+            } catch (_) { /* ignore */ }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('visionBoardData', JSON.stringify({ cards, nextId }));
+            } catch (_) { /* ignore */ }
+        }
+
+        // ============================================================
+        //  TOAST
+        // ============================================================
+        function showToast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => el.classList.remove('show'), 2400);
+        }
+
+        // ============================================================
+        //  CELEBRATION (confetti)
+        // ============================================================
+        function celebrate() {
+            const container = document.getElementById('celebrationOverlay');
+            const colors = ['#d4b8a0', '#8aa9b5', '#c9b0a8', '#b8b0a0', '#a8b8c0', '#c8b0b8', '#d4c8b0', '#b0b0b0'];
+            const count = 80;
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = 6 + Math.random() * 8;
+                piece.style.width = size + 'px';
+                piece.style.height = size * (0.4 + Math.random() * 0.8) + 'px';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.top = '-10px';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.8) + 's';
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(piece);
+                setTimeout(() => piece.remove(), 4000);
+            }
+        }
+
+        // ============================================================
+        //  RENDER
+        // ============================================================
+        function render() {
+            const board = document.getElementById('board');
+            const focusMode = focusedCardId !== null;
+
+            if (cards.length === 0) {
+                board.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">✦</div>
+                        <h3>Your vision board is empty</h3>
+                        <p>Add images that inspire you and goals with steps to achieve them.</p>
+                        <button class="btn btn-primary" id="emptyAddGoal">+ Add Your First Goal</button>
+                    </div>
+                `;
+                const btn = document.getElementById('emptyAddGoal');
+                if (btn) btn.addEventListener('click', () => openGoalModal());
+                board.classList.remove('focus-mode');
+                return;
+            }
+
+            board.classList.toggle('focus-mode', focusMode);
+
+            let html = '';
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const isFocused = card.id === focusedCardId;
+                const cat = card.category ? CATEGORY_MAP[card.category] : null;
+
+                html += `<div class="card ${isFocused ? 'focused' : ''}" data-index="${i}" data-id="${card.id}">`;
+
+                // drag handle
+                html += `<button class="card-drag-handle" data-drag-handle="${card.id}" aria-label="Drag to reorder">⋮</button>`;
+
+                // image
+                if (card.type === 'image' && card.imageData) {
+                    html += `<div class="card-image-wrap"><img src="${card.imageData}" alt="${card.title || 'Vision'}" loading="lazy" /></div>`;
+                } else if (card.type === 'image') {
+                    html += `<div class="card-image-wrap"><div class="card-image-placeholder">✧</div></div>`;
+                } else {
+                    // goal cards get a subtle top bar
+                    html += `<div class="card-image-wrap" style="background:var(--bg-dark);height:6px;min-height:6px;aspect-ratio:auto;"></div>`;
+                }
+
+                // body
+                html += `<div class="card-body">`;
+
+                if (card.type === 'image') {
+                    html += `<div class="card-title">${escHtml(card.title || 'Untitled')}</div>`;
+                    if (card.desc) {
+                        html += `<div class="card-desc">${escHtml(card.desc)}</div>`;
+                    }
+                } else {
+                    // goal
+                    html += `<div class="card-title">${escHtml(card.title || 'Untitled goal')}</div>`;
+                    if (card.desc) {
+                        html += `<div class="card-desc">${escHtml(card.desc)}</div>`;
+                    }
+                    // category
+                    if (cat) {
+                        html += `<span class="card-category"><span class="dot" style="background:${cat.color}"></span>${cat.label}</span>`;
+                    }
+
+                    // progress (based on steps)
+                    const steps = card.steps || [];
+                    const total = steps.length;
+                    const done = steps.filter(s => s.done).length;
+                    const prog = total === 0 ? 0 : Math.round((done / total) * 100);
+                    const fillColor = prog >= 100 ? '#c9b0a8' : 'var(--accent)';
+                    html += `
+                        <div class="card-progress-wrap">
+                            <div class="card-progress-track">
+                                <div class="card-progress-fill" style="width:${prog}%;background:${fillColor}"></div>
+                            </div>
+                            <span class="card-progress-label">${prog}%</span>
+                        </div>
+                    `;
+
+                    // steps list (if any)
+                    if (steps.length > 0) {
+                        html += `<div class="steps-list">`;
+                        steps.forEach((step, idx) => {
+                            const doneClass = step.done ? 'done' : '';
+                            const checkClass = step.done ? 'done-check' : '';
+                            html += `
+                                <div class="step-item ${doneClass}" data-step-index="${idx}" data-card-id="${card.id}">
+                                    <button class="step-check ${checkClass}" data-step-toggle="${card.id}-${idx}">${step.done ? '✓' : ''}</button>
+                                    <span class="step-text">${escHtml(step.text)}</span>
+                                    <button class="step-delete" data-step-delete="${card.id}-${idx}">✕</button>
+                                </div>
+                            `;
+                        });
+                        html += `</div>`;
+                    }
+                }
+
+                // actions
+                html += `
+                    <div class="card-actions">
+                        <button class="card-action-btn" data-focus="${card.id}" aria-label="Focus" title="Focus">⊞</button>
+                        ${card.type === 'goal' ? `<button class="card-action-btn" data-edit="${card.id}" aria-label="Edit" title="Edit">✎</button>` : ''}
+                        <button class="card-action-btn danger" data-delete="${card.id}" aria-label="Delete" title="Delete">✕</button>
+                    </div>
+                `;
+
+                html += `</div></div>`;
+            }
+
+            board.innerHTML = html;
+
+            // ---- attach event listeners ----
+            // drag handles
+            document.querySelectorAll('[data-drag-handle]').forEach(el => {
+                el.addEventListener('mousedown', onDragStart);
+                el.addEventListener('touchstart', onDragStart, { passive: false });
+            });
+
+            // step toggle
+            document.querySelectorAll('[data-step-toggle]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const key = el.dataset.stepToggle;
+                    const [cardId, stepIdx] = key.split('-').map(Number);
+                    toggleStep(cardId, stepIdx);
+                });
+            });
+
+            // step delete
+            document.querySelectorAll('[data-step-delete]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const key = el.dataset.stepDelete;
+                    const [cardId, stepIdx] = key.split('-').map(Number);
+                    deleteStep(cardId, stepIdx);
+                });
+            });
+
+            // focus
+            document.querySelectorAll('[data-focus]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = Number(el.dataset.focus);
+                    toggleFocus(id);
+                });
+            });
+
+            // edit
+            document.querySelectorAll('[data-edit]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = Number(el.dataset.edit);
+                    const card = cards.find(c => c.id === id);
+                    if (card) openGoalModal(card);
+                });
+            });
+
+            // delete
+            document.querySelectorAll('[data-delete]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = Number(el.dataset.delete);
+                    if (confirm('Remove this card?')) {
+                        deleteCard(id);
+                    }
+                });
+            });
+
+            // card click for focus (tap on card body)
+            document.querySelectorAll('.card').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    if (e.target.closest('button') || e.target.closest('input') || e.target.closest('textarea') ||
+                        e.target.closest('select')) return;
+                    const id = Number(el.dataset.id);
+                    if (id) toggleFocus(id);
+                });
+            });
+
+            // focus backdrop
+            const backdrop = document.getElementById('focusBackdrop');
+            backdrop.classList.toggle('active', focusMode);
+            backdrop.onclick = () => exitFocus();
+
+            const exitBtn = document.getElementById('focusExit');
+            exitBtn.classList.toggle('visible', focusMode);
+            exitBtn.onclick = () => exitFocus();
+
+            // close focus on escape
+            document.onkeydown = (e) => {
+                if (e.key === 'Escape') exitFocus();
+            };
+        }
+
+        // ============================================================
+        //  HELPERS
+        // ============================================================
+        function escHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function generateId() { return nextId++; }
+
+        // ============================================================
+        //  CARD OPERATIONS
+        // ============================================================
+        function addCard(card) {
+            card.id = generateId();
+            cards.push(card);
+            saveState();
+            render();
+            if (card.type === 'goal' && card.steps && card.steps.length > 0 && card.steps.every(s => s.done)) {
+                celebrate();
+                showToast('Goal achieved!');
+            } else {
+                showToast(card.type === 'image' ? 'Image added' : 'Goal added');
+            }
+        }
+
+        function updateCard(id, updates) {
+            const idx = cards.findIndex(c => c.id === id);
+            if (idx === -1) return;
+            const old = cards[idx];
+            cards[idx] = { ...old, ...updates };
+            saveState();
+            render();
+            // check if all steps done and progress 100%
+            const steps = cards[idx].steps || [];
+            if (cards[idx].type === 'goal' && steps.length > 0 && steps.every(s => s.done)) {
+                celebrate();
+                showToast('Goal achieved!');
+            }
+        }
+
+        function deleteCard(id) {
+            cards = cards.filter(c => c.id !== id);
+            if (focusedCardId === id) exitFocus();
+            saveState();
+            render();
+            showToast('Card removed');
+        }
+
+        // ============================================================
+        //  STEPS OPERATIONS
+        // ============================================================
+        function toggleStep(cardId, stepIdx) {
+            const card = cards.find(c => c.id === cardId);
+            if (!card || !card.steps || stepIdx >= card.steps.length) return;
+            card.steps[stepIdx].done = !card.steps[stepIdx].done;
+            updateCard(cardId, { steps: card.steps });
+        }
+
+        function deleteStep(cardId, stepIdx) {
+            const card = cards.find(c => c.id === cardId);
+            if (!card || !card.steps) return;
+            card.steps.splice(stepIdx, 1);
+            updateCard(cardId, { steps: card.steps });
+            showToast('Step removed');
+        }
+
+        function addStepToCard(cardId, text) {
+            const card = cards.find(c => c.id === cardId);
+            if (!card) return;
+            if (!card.steps) card.steps = [];
+            card.steps.push({ text: text.trim(), done: false });
+            updateCard(cardId, { steps: card.steps });
+        }
+
+        // ============================================================
+        //  FOCUS
+        // ============================================================
+        function toggleFocus(id) {
+            if (focusedCardId === id) {
+                exitFocus();
+            } else {
+                focusedCardId = id;
+                render();
+            }
+        }
+
+        function exitFocus() {
+            focusedCardId = null;
+            render();
+        }
+
+        // ============================================================
+        //  MODAL
+        // ============================================================
+        function openModal(title, bodyHTML) {
+            const overlay = document.getElementById('modalOverlay');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = bodyHTML;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // close handlers
+            document.getElementById('modalClose').onclick = closeModal;
+            overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
+            // setup form
+            const form = document.getElementById('modalForm');
+            if (form) {
+                form.onsubmit = (e) => {
+                    e.preventDefault();
+                    handleModalSubmit(form);
+                };
+            }
+            // file input preview
+            const fileInput = document.getElementById('modalFileInput');
+            if (fileInput) {
+                fileInput.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const preview = document.getElementById('modalImagePreview');
+                        const img = preview.querySelector('img');
+                        img.src = ev.target.result;
+                        preview.style.display = 'block';
+                        preview.dataset.imageData = ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                };
+            }
+            const removeImgBtn = document.getElementById('modalRemoveImg');
+            if (removeImgBtn) {
+                removeImgBtn.onclick = () => {
+                    const preview = document.getElementById('modalImagePreview');
+                    preview.style.display = 'none';
+                    preview.dataset.imageData = '';
+                    const input = document.getElementById('modalFileInput');
+                    if (input) input.value = '';
+                };
+            }
+            // focus first input
+            setTimeout(() => {
+                const first = document.querySelector('#modalBody input, #modalBody textarea, #modalBody select');
+                if (first) first.focus();
+            }, 150);
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openGoalModal(existingCard) {
+            const isEdit = !!existingCard;
+            const c = existingCard || {};
+            const steps = c.steps || [];
+            const catOptions = CATEGORIES.map(cat =>
+                `<option value="${cat.value}" ${c.category === cat.value ? 'selected' : ''}>${cat.label}</option>`
+            ).join('');
+
+            // steps editor
+            let stepsHtml = '';
+            if (steps.length > 0) {
+                stepsHtml = steps.map((s, idx) =>
+                    `<div class="step-editor-item">
+                        <span class="step-text">${escHtml(s.text)}</span>
+                        <button type="button" class="step-remove" data-remove-step="${idx}">✕</button>
+                    </div>`
+                ).join('');
+            } else {
+                stepsHtml = `<div style="color:var(--text-muted);font-size:0.9rem;padding:4px 0;">No steps yet</div>`;
+            }
+
+            const html = `
+                <form id="modalForm">
+                    <input type="hidden" name="editId" value="${isEdit ? c.id : ''}" />
+                    <div class="form-group">
+                        <label for="goalTitle">Goal title *</label>
+                        <input type="text" id="goalTitle" value="${escHtml(c.title || '')}" placeholder="e.g. Run a marathon" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="goalDesc">Description (optional)</label>
+                        <textarea id="goalDesc" placeholder="What does this goal mean to you?">${escHtml(c.desc || '')}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="goalCategory">Category</label>
+                        <select id="goalCategory">${catOptions}</select>
+                    </div>
+                    <div class="form-group">
+                        <label>Steps (small actionable items)</label>
+                        <div class="steps-editor">
+                            <div class="step-input-row">
+                                <input type="text" id="newStepInput" placeholder="Add a step..." />
+                                <button type="button" class="btn btn-accent" id="addStepBtn" style="padding:6px 14px;min-height:40px;">+</button>
+                            </div>
+                            <div class="step-list-editor" id="stepListEditor">
+                                ${stepsHtml}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">${isEdit ? 'Update' : 'Add'} Goal</button>
+                    </div>
+                </form>
+            `;
+
+            openModal(isEdit ? 'Edit Goal' : 'New Goal', html);
+
+            // ---- steps editor logic ----
+            const addBtn = document.getElementById('addStepBtn');
+            const stepInput = document.getElementById('newStepInput');
+            const stepList = document.getElementById('stepListEditor');
+
+            function refreshStepList() {
+                // get current steps from hidden state (we'll maintain an array)
+                const currentSteps = [];
+                const items = stepList.querySelectorAll('.step-editor-item');
+                items.forEach(item => {
+                    const text = item.querySelector('.step-text').textContent;
+                    currentSteps.push(text);
+                });
+                // rebuild list
+                stepList.innerHTML = currentSteps.map((text, idx) =>
+                    `<div class="step-editor-item">
+                        <span class="step-text">${escHtml(text)}</span>
+                        <button type="button" class="step-remove" data-remove-step="${idx}">✕</button>
+                    </div>`
+                ).join('');
+                // attach remove handlers
+                stepList.querySelectorAll('[data-remove-step]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const idx = parseInt(btn.dataset.removeStep);
+                        currentSteps.splice(idx, 1);
+                        refreshStepList();
+                    });
+                });
+                // store steps in a hidden field for form submit
+                let hiddenSteps = document.getElementById('hiddenSteps');
+                if (!hiddenSteps) {
+                    hiddenSteps = document.createElement('input');
+                    hiddenSteps.type = 'hidden';
+                    hiddenSteps.id = 'hiddenSteps';
+                    hiddenSteps.name = 'steps';
+                    stepList.parentElement.appendChild(hiddenSteps);
+                }
+                hiddenSteps.value = JSON.stringify(currentSteps);
+            }
+
+            // initial sync
+            const initialSteps = steps.map(s => s.text);
+            if (initialSteps.length > 0) {
+                // rebuild list from existing steps
+                stepList.innerHTML = initialSteps.map((text, idx) =>
+                    `<div class="step-editor-item">
+                        <span class="step-text">${escHtml(text)}</span>
+                        <button type="button" class="step-remove" data-remove-step="${idx}">✕</button>
+                    </div>`
+                ).join('');
+                stepList.querySelectorAll('[data-remove-step]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const idx = parseInt(btn.dataset.removeStep);
+                        const current = JSON.parse(document.getElementById('hiddenSteps').value || '[]');
+                        current.splice(idx, 1);
+                        document.getElementById('hiddenSteps').value = JSON.stringify(current);
+                        refreshStepList();
+                    });
+                });
+                let hiddenSteps = document.getElementById('hiddenSteps');
+                if (!hiddenSteps) {
+                    hiddenSteps = document.createElement('input');
+                    hiddenSteps.type = 'hidden';
+                    hiddenSteps.id = 'hiddenSteps';
+                    hiddenSteps.name = 'steps';
+                    stepList.parentElement.appendChild(hiddenSteps);
+                }
+                hiddenSteps.value = JSON.stringify(initialSteps);
+            } else {
+                // empty list
+                let hiddenSteps = document.getElementById('hiddenSteps');
+                if (!hiddenSteps) {
+                    hiddenSteps = document.createElement('input');
+                    hiddenSteps.type = 'hidden';
+                    hiddenSteps.id = 'hiddenSteps';
+                    hiddenSteps.name = 'steps';
+                    stepList.parentElement.appendChild(hiddenSteps);
+                }
+                hiddenSteps.value = JSON.stringify([]);
+            }
+
+            if (addBtn && stepInput) {
+                addBtn.addEventListener('click', () => {
+                    const text = stepInput.value.trim();
+                    if (!text) return;
+                    const current = JSON.parse(document.getElementById('hiddenSteps').value || '[]');
+                    current.push(text);
+                    document.getElementById('hiddenSteps').value = JSON.stringify(current);
+                    stepInput.value = '';
+                    refreshStepList();
+                });
+                stepInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        addBtn.click();
+                    }
+                });
+            }
+
+            // expose refresh function to global for inline calls
+            window._refreshStepList = refreshStepList;
+        }
+
+        function openImageModal() {
+            const html = `
+                <form id="modalForm">
+                    <div class="form-group">
+                        <label for="imageTitle">Title (optional)</label>
+                        <input type="text" id="imageTitle" placeholder="e.g. My dream home" />
+                    </div>
+                    <div class="form-group">
+                        <label for="imageDesc">Description (optional)</label>
+                        <textarea id="imageDesc" placeholder="What does this image represent?" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Image *</label>
+                        <div class="file-input-wrap">
+                            <span class="file-label">
+                                <span class="icon">⊡</span>
+                                Tap to choose an image
+                            </span>
+                            <input type="file" id="modalFileInput" accept="image/*" required />
+                        </div>
+                        <div class="image-preview" id="modalImagePreview">
+                            <img src="" alt="Preview" />
+                            <button type="button" class="remove-img" id="modalRemoveImg">✕</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-accent">Add Image</button>
+                    </div>
+                </form>
+            `;
+
+            openModal('Add Image', html);
+        }
+
+        function handleModalSubmit(form) {
+            const isGoal = form.querySelector('#goalTitle') !== null;
+
+            if (isGoal) {
+                const title = document.getElementById('goalTitle').value.trim();
+                if (!title) { showToast('Please enter a title'); return; }
+                const desc = document.getElementById('goalDesc').value.trim();
+                const category = document.getElementById('goalCategory').value;
+                const stepsRaw = document.getElementById('hiddenSteps')?.value || '[]';
+                let steps = [];
+                try {
+                    const stepTexts = JSON.parse(stepsRaw);
+                    steps = stepTexts.map(text => ({ text: text.trim(), done: false }));
+                } catch (_) { steps = []; }
+
+                const idInput = form.querySelector('[name="editId"]');
+                const editId = idInput ? parseInt(idInput.value) : null;
+
+                if (editId) {
+                    // editing existing
+                    const existing = cards.find(c => c.id === editId);
+                    if (existing) {
+                        // preserve existing done status for steps that match by text
+                        const existingSteps = existing.steps || [];
+                        const mergedSteps = steps.map(newStep => {
+                            const match = existingSteps.find(es => es.text === newStep.text);
+                            return { ...newStep, done: match ? match.done : false };
+                        });
+                        updateCard(editId, { title, desc, category, steps: mergedSteps });
+                    }
+                    closeModal();
+                } else {
+                    addCard({ type: 'goal', title, desc, category, steps });
+                    closeModal();
+                }
+            } else {
+                // image
+                const title = document.getElementById('imageTitle').value.trim();
+                const desc = document.getElementById('imageDesc').value.trim();
+                const preview = document.getElementById('modalImagePreview');
+                const imageData = preview.dataset.imageData || '';
+
+                if (!imageData) { showToast('Please select an image'); return; }
+
+                addCard({ type: 'image', title, desc, imageData });
+                closeModal();
+            }
+        }
+
+        // ============================================================
+        //  DRAG & DROP (touch + mouse)
+        // ============================================================
+        function onDragStart(e) {
+            e.preventDefault();
+            const handle = e.currentTarget;
+            const cardEl = handle.closest('.card');
+            if (!cardEl) return;
+            const id = Number(cardEl.dataset.id);
+            const index = cards.findIndex(c => c.id === id);
+            if (index === -1) return;
+
+            const rect = cardEl.getBoundingClientRect();
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+
+            dragData = {
+                element: cardEl,
+                index: index,
+                startX: clientX,
+                startY: clientY,
+                offsetX: clientX - rect.left,
+                offsetY: clientY - rect.top,
+                ghost: null,
+                moved: false,
+            };
+
+            // ghost
+            const ghost = cardEl.cloneNode(true);
+            ghost.style.position = 'fixed';
+            ghost.style.width = rect.width + 'px';
+            ghost.style.pointerEvents = 'none';
+            ghost.style.opacity = '0.85';
+            ghost.style.zIndex = '999';
+            ghost.style.transform = 'scale(1.02)';
+            ghost.style.boxShadow = 'var(--shadow-hover)';
+            ghost.style.border = 'none';
+            ghost.style.left = (clientX - dragData.offsetX) + 'px';
+            ghost.style.top = (clientY - dragData.offsetY) + 'px';
+            ghost.style.transition = 'none';
+            document.body.appendChild(ghost);
+            dragData.ghost = ghost;
+
+            cardEl.classList.add('dragging');
+
+            if (e.type === 'touchstart') {
+                document.addEventListener('touchmove', onDragMove, { passive: false });
+                document.addEventListener('touchend', onDragEnd, { passive: false });
+            } else {
+                document.addEventListener('mousemove', onDragMove);
+                document.addEventListener('mouseup', onDragEnd);
+            }
+
+            document.body.style.userSelect = 'none';
+        }
+
+        function onDragMove(e) {
+            e.preventDefault();
+            if (!dragData) return;
+
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+            if (dragData.ghost) {
+                dragData.ghost.style.left = (clientX - dragData.offsetX) + 'px';
+                dragData.ghost.style.top = (clientY - dragData.offsetY) + 'px';
+            }
+
+            const dx = clientX - dragData.startX;
+            const dy = clientY - dragData.startY;
+            if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+                dragData.moved = true;
+            }
+
+            if (!dragData.moved) return;
+
+            const elements = document.querySelectorAll('.card:not(.dragging)');
+            let targetIndex = -1;
+            for (const el of elements) {
+                const r = el.getBoundingClientRect();
+                if (clientX >= r.left && clientX <= r.right &&
+                    clientY >= r.top && clientY <= r.bottom) {
+                    targetIndex = Number(el.dataset.index);
+                    break;
+                }
+            }
+
+            if (targetIndex !== -1 && targetIndex !== dragData.index) {
+                const from = dragData.index;
+                const to = targetIndex;
+                const [moved] = cards.splice(from, 1);
+                cards.splice(to, 0, moved);
+                dragData.index = to;
+                saveState();
+                render();
+                const newEl = document.querySelector(`.card[data-id="${moved.id}"]`);
+                if (newEl) {
+                    dragData.element = newEl;
+                    newEl.classList.add('dragging');
+                    const rect = newEl.getBoundingClientRect();
+                    dragData.offsetX = clientX - rect.left;
+                    dragData.offsetY = clientY - rect.top;
+                }
+                // re-attach drag handles
+                document.querySelectorAll('[data-drag-handle]').forEach(el => {
+                    el.removeEventListener('mousedown', onDragStart);
+                    el.removeEventListener('touchstart', onDragStart);
+                    el.addEventListener('mousedown', onDragStart);
+                    el.addEventListener('touchstart', onDragStart, { passive: false });
+                });
+            }
+        }
+
+        function onDragEnd(e) {
+            if (!dragData) return;
+            if (dragData.ghost) dragData.ghost.remove();
+            if (dragData.element) dragData.element.classList.remove('dragging');
+            document.body.style.userSelect = '';
+            document.removeEventListener('mousemove', onDragMove);
+            document.removeEventListener('mouseup', onDragEnd);
+            document.removeEventListener('touchmove', onDragMove);
+            document.removeEventListener('touchend', onDragEnd);
+            dragData = null;
+            document.querySelectorAll('.card.drag-over').forEach(el => el.classList.remove('drag-over'));
+            render();
+        }
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        loadState();
+        render();
+
+        document.getElementById('addGoalBtn').addEventListener('click', () => openGoalModal());
+        document.getElementById('addImageBtn').addEventListener('click', () => openImageModal());
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (document.getElementById('modalOverlay').classList.contains('active')) closeModal();
+            }
+        });
+
+        // prevent double-tap zoom on iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        // expose for inline
+        window.closeModal = closeModal;
+        window.openGoalModal = openGoalModal;
+        window.openImageModal = openImageModal;
+
+        console.log('✦ Vision Board 2026 · Neumorphic edition');
+    </script>
+</body>
+</html>
